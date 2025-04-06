@@ -5,23 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie API Documentation</title>
     <style>
-        table {
-          width: 100%;
-          border-collapse: collapse;
-          margin-top: 20px;
-        }
-        th, td {
-          border: 1px solid #ddd;
-          padding: 8px;
-          text-align: left;
-        }
-        th {
-          background-color: #f2f2f2;
-        }
-        h1 {
-          text-align: center;
-        }
-    </style>
+        
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-bottom: 40px;
+    }
+    th, td {
+      border: 1px solid #aaa;
+      padding: 12px;
+      text-align: left;
+    }
+    th {
+      background-color: #f4f4f4;
+    }
+    h2 {
+      margin-top: 40px;
+    }
+  </style>
 
 </head>
 
@@ -29,62 +34,125 @@
     <h1>Movie API</h1>
     <p>Welcome to the Movie API documentation. This API provides information about various movies, their directors, and genres. Users can sign up, update their information, and create a list of their favorite movies.</p>
     
+    <h2> Movie Endpoints</h2>
+
     <table>
-        <thead>
-          <tr>
-            <th>Request</th>
-            <th>URL</th>
-            <th>Response</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>GET</td>
-            <td>/movies</td>
-            <td>Returns a list of all movies.</td>
-          </tr>
-          <tr>
-            <td>GET</td>
-            <td>/movies/:title</td>
-            <td>Returns data about a single movie by title (description, genre, director, image URL, featured status).</td>
-          </tr>
-          <tr>
-            <td>GET</td>
-            <td>/genres/:name</td>
-            <td>Returns genre description by name.</td>
-          </tr>
-          <tr>
-            <td>GET</td>
-            <td>/directors/:name</td>
-            <td>Returns director’s bio, birth year, and death year by name.</td>
-          </tr>
-          <tr>
-            <td>POST</td>
-            <td>/users</td>
-            <td>Registers a new user.</td>
-          </tr>
-          <tr>
-            <td>PUT</td>
-            <td>/users/:username</td>
-            <td>Updates user information (e.g., username).</td>
-          </tr>
-          <tr>
-            <td>POST</td>
-            <td>/users/:username/movies/:movieID</td>
-            <td>Adds a movie to the user’s list of favorites. Returns confirmation text.</td>
-          </tr>
-          <tr>
-            <td>DELETE</td>
-            <td>/users/:username/movies/:movieID</td>
-            <td>Removes a movie from the user’s list of favorites. Returns confirmation text.</td>
-          </tr>
-          <tr>
-            <td>DELETE</td>
-            <td>/users/:username</td>
-            <td>Deregisters an existing user. Returns confirmation text.</td>
-          </tr>
-        </tbody>
-      </table>
-      
+      <tr>
+        <th>Description</th>
+        <th>Method</th>
+        <th>Endpoint</th>
+        <th>Query Parameters</th>
+        <th>Request Body (Example)</th>
+        <th>Response</th>
+      </tr>
+  
+      <tr>
+        <td>Returns a list of all movies</td>
+        <td>GET</td>
+        <td>/movies</td>
+        <td>None</td>
+        <td>None</td>
+        <td>Array of movie objects</td>
+      </tr>
+  
+      <tr>
+        <td>Returns movie details by title</td>
+        <td>GET</td>
+        <td>/movies/:title</td>
+        <td>title (movie title)</td>
+        <td>None</td>
+        <td>Movie object with title, description, genre, director, imageURL, featured</td>
+      </tr>
+  
+      <tr>
+        <td>Returns genre description by name</td>
+        <td>GET</td>
+        <td>/genres/:name</td>
+        <td>name (genre name)</td>
+        <td>None</td>
+        <td>Genre object with name and description</td>
+      </tr>
+  
+      <tr>
+        <td>Returns director information by name</td>
+        <td>GET</td>
+        <td>/directors/:name</td>
+        <td>name (director's name)</td>
+        <td>None</td>
+        <td>Director object with bio, birth year, death year</td>
+      </tr>
+    </table>
+  
+    <h2> User Endpoints</h2>
+  
+    <table>
+      <tr>
+        <th>Description</th>
+        <th>Method</th>
+        <th>Endpoint</th>
+        <th>Query Parameters</th>
+        <th>Request Body (Example)</th>
+        <th>Response</th>
+      </tr>
+  
+      <tr>
+        <td>Register a new user</td>
+        <td>POST</td>
+        <td>/users</td>
+        <td>None</td>
+        <td>
+            Format: JSON <br> <br>
+            Example:  <br> <br>
+          {
+            "username": "john_doe",<br>
+            "email": "john@example.com",<br>
+            "password": "secure123"
+          }
+        </td>
+        <td>Confirmation message or created user object</td>
+      </tr>
+  
+      <tr>
+        <td>Update user information</td>
+        <td>PUT</td>
+        <td>/users/:username</td>
+        <td>username (current username)</td>
+        <td>
+            Format: JSON  <br> <br>
+            Example: <br> <br>
+          {
+            "username": "new_name"
+          }
+        </td>
+        <td>Updated user object</td>
+      </tr>
+  
+      <tr>
+        <td>Add a movie to user’s favorites</td>
+        <td>POST</td>
+        <td>/users/:username/movies/:movieID</td>
+        <td>username, movieID</td>
+        <td>None</td>
+        <td>Text: "Movie has been added to favorites"</td>
+      </tr>
+  
+      <tr>
+        <td>Remove a movie from user’s favorites</td>
+        <td>DELETE</td>
+        <td>/users/:username/movies/:movieID</td>
+        <td>username, movieID</td>
+        <td>None</td>
+        <td>Text: "Movie has been removed from favorites"</td>
+      </tr>
+  
+      <tr>
+        <td>Deregister an existing user</td>
+        <td>DELETE</td>
+        <td>/users/:username</td>
+        <td>username</td>
+        <td>None</td>
+        <td>Text: "User has been deregistered"</td>
+      </tr>
+    </table>
 </body>
 </html>
